@@ -7,7 +7,7 @@ $APPLICATION->IncludeComponent(
     'bitrix:main.ui.grid',
     '',
     [
-        'GRID_ID' => 'laptops_grid',
+        'GRID_ID' => 'notebook_grid',
         'COLUMNS' => [
             ['id' => 'ID', 'name' => 'ID', 'sort' => 'ID'],
             ['id' => 'NAME', 'name' => 'Название', 'sort' => 'NAME'],

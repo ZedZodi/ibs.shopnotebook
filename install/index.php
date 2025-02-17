@@ -1,11 +1,10 @@
-<?
-use Bitrix\Main\Localization\Loc;
-use Bitrix\Main\ModuleManager;
-use Bitrix\Main\Config\Option;
-use Bitrix\Main\Application;
+<?php
+use \Bitrix\Main\Localization\Loc;
+use \Bitrix\Main\ModuleManager;
+use \Bitrix\Main\Config\Option;
+use \Bitrix\Main\Application;
 use \Bitrix\Main\Entity\Base;
 use \Bitrix\Main\Loader;
-use \Bitrix\Main\EventManager;
 
 use \Ibs\shopnotebook\ManufacturerTable;
 use \Ibs\shopnotebook\ModelTable;
@@ -71,7 +70,7 @@ class Ibs_shopnotebook extends CModule
             $this->InstallFiles();
             if ($request["add_data"] == "Y") {
                 // создаем первую и единственную запись в БД
-//                $this->addData();
+                $this->addData();
             }
             $APPLICATION->IncludeAdminFile(
                 Loc::getMessage('INSTALL_TITLE_STEP_2'),
@@ -182,29 +181,58 @@ class Ibs_shopnotebook extends CModule
 
     function addData()
     {
-        Loader::includeModule($this->MODULE_ID);
+        if(Loader::includeModule($this->MODULE_ID)){
 
-        // добавляем запись в таблицу БД
-        \Ibs\shopnotebook\DataTable::add(
-            array(
-                "ACTIVE" => "N",
-                "SITE" => '["s1"]',
-                "LINK" => " ",
-                "LINK_PICTURE" => "/bitrix/components/ibs.shopnotebook/popup.baner/templates/.default/img/banner.jpg",
-                "ALT_PICTURE" => " ",
-                "EXCEPTIONS" => " ",
-                "DATE" => new \Bitrix\Main\Type\DateTime(date("d.m.Y H:i:s")),
-                "TARGET" =>  "self",
-                "AUTHOR_ID" =>  "1",
-            )
-        );
+            $manufacturers = [
+                ['NAME' => 'Apple'],
+                ['NAME' => 'Dell'],
+                ['NAME' => 'HP'],
+                ['NAME' => 'Lenovo'],
+                ['NAME' => 'Asus'],
+            ];
 
-        \Ibs\shopnotebook\AuthorTable::add(
-            array(
-                "NAME" => "Иван",
-                "LAST_NAME" => "Иванов",
-            )
-        );
+            foreach ($manufacturers as $manufacturer) {
+                ManufacturerTable::add($manufacturer);
+            }
+
+            $models = [
+                ['NAME' => 'MacBook Pro', 'MANUFACTURER_ID' => 1],
+                ['NAME' => 'XPS 13', 'MANUFACTURER_ID' => 2],
+                ['NAME' => 'Spectre x360', 'MANUFACTURER_ID' => 3],
+                ['NAME' => 'ThinkPad X1', 'MANUFACTURER_ID' => 4],
+                ['NAME' => 'ZenBook Pro', 'MANUFACTURER_ID' => 5],
+            ];
+
+            foreach ($models as $model) {
+                ModelTable::add($model);
+            }
+
+            $notebooks = [
+                ['NAME' => 'MacBook Pro 16"', 'YEAR' => 2023, 'PRICE' => 2500.00, 'MODEL_ID' => 1],
+                ['NAME' => 'Dell XPS 13 9310', 'YEAR' => 2022, 'PRICE' => 1500.00, 'MODEL_ID' => 2],
+                ['NAME' => 'HP Spectre x360 14', 'YEAR' => 2023, 'PRICE' => 1800.00, 'MODEL_ID' => 3],
+                ['NAME' => 'Lenovo ThinkPad X1 Carbon', 'YEAR' => 2023, 'PRICE' => 2000.00, 'MODEL_ID' => 4],
+                ['NAME' => 'Asus ZenBook Pro Duo', 'YEAR' => 2023, 'PRICE' => 2200.00, 'MODEL_ID' => 5],
+            ];
+
+            foreach ($notebooks as $notebook) {
+                NotebookTable::add($notebook);
+            }
+
+            $options = [
+                ['NAME' => '16GB RAM', 'NOTEBOOK_ID' => 1],
+                ['NAME' => '1TB SSD', 'NOTEBOOK_ID' => 1],
+                ['NAME' => '4K Display', 'NOTEBOOK_ID' => 2],
+                ['NAME' => 'Touchscreen', 'NOTEBOOK_ID' => 3],
+                ['NAME' => 'Backlit Keyboard', 'NOTEBOOK_ID' => 4],
+            ];
+
+            foreach ($options as $option) {
+                OptionTable::add($option);
+            }
+
+            echo "Данные успешно добавлены!";
+        }
 
         return true;
     }
