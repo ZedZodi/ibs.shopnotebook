@@ -110,20 +110,20 @@ class Ibs_shopnotebook extends CModule
     {
         // подключаем модуль для того что бы был видем класс ORM
         if(Loader::includeModule($this->MODULE_ID)){
-            if (!Application::getConnection(ManufacturerTable::getConnectionName())->isTableExists(Base::getInstance("\Ibs\shopnotebook\ManufacturerTable")->getDBTableName())) {
-                Base::getInstance("\Ibs\shopnotebook\ManufacturerTable")->createDbTable();
+            if (!Application::getConnection(ManufacturerTable::getConnectionName())->isTableExists(Base::getInstance(ManufacturerTable::class)->getDBTableName())) {
+                Base::getInstance(ManufacturerTable::class)->createDbTable();
             }
 
-            if (!Application::getConnection(ModelTable::getConnectionName())->isTableExists(Base::getInstance("\Ibs\shopnotebook\ModelTable")->getDBTableName())) {
-                Base::getInstance("\Ibs\shopnotebook\ModelTable")->createDbTable();
+            if (!Application::getConnection(ModelTable::getConnectionName())->isTableExists(Base::getInstance(ModelTable::class)->getDBTableName())) {
+                Base::getInstance(ModelTable::class)->createDbTable();
             }
 
-            if (!Application::getConnection(NotebookTable::getConnectionName())->isTableExists(Base::getInstance("\Ibs\shopnotebook\NotebookTable")->getDBTableName())) {
-                Base::getInstance("\Ibs\shopnotebook\NotebookTable")->createDbTable();
+            if (!Application::getConnection(NotebookTable::getConnectionName())->isTableExists(Base::getInstance(NotebookTable::class)->getDBTableName())) {
+                Base::getInstance(NotebookTable::class)->createDbTable();
             }
 
-            if (!Application::getConnection(OptionTable::getConnectionName())->isTableExists(Base::getInstance("\Ibs\shopnotebook\OptionTable")->getDBTableName())) {
-                Base::getInstance("\Ibs\shopnotebook\OptionTable")->createDbTable();
+            if (!Application::getConnection(OptionTable::getConnectionName())->isTableExists(Base::getInstance(OptionTable::class)->getDBTableName())) {
+                Base::getInstance(OptionTable::class)->createDbTable();
             }
         }
     }
