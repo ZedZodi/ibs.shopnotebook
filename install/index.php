@@ -1,31 +1,31 @@
 <?php
-use \Bitrix\Main\Localization\Loc;
-use \Bitrix\Main\ModuleManager;
-use \Bitrix\Main\Config\Option;
-use \Bitrix\Main\Application;
-use \Bitrix\Main\Entity\Base;
-use \Bitrix\Main\Loader;
 
-use \Ibs\shopnotebook\ManufacturerTable;
-use \Ibs\shopnotebook\ModelTable;
-use \Ibs\shopnotebook\NotebookTable;
-use \Ibs\shopnotebook\OptionTable;
+use Bitrix\Main\Application;
+use Bitrix\Main\Config\Option;
+use Bitrix\Main\Entity\Base;
+use Bitrix\Main\Loader;
+use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\ModuleManager;
+use Ibs\shopnotebook\ManufacturerTable;
+use Ibs\shopnotebook\ModelTable;
+use Ibs\shopnotebook\NotebookTable;
+use Ibs\shopnotebook\OptionTable;
 
 Loc::loadMessages(__FILE__);
 
 class Ibs_shopnotebook extends CModule
 {
     // переменные модуля
-    public  $MODULE_ID;
-    public  $MODULE_VERSION;
-    public  $MODULE_VERSION_DATE;
-    public  $MODULE_NAME;
-    public  $MODULE_DESCRIPTION;
-    public  $PARTNER_NAME;
-    public  $PARTNER_URI;
-    public  $SHOW_SUPER_ADMIN_GROUP_RIGHTS;
-    public  $MODULE_GROUP_RIGHTS;
-    public  $errors;
+    public $MODULE_ID;
+    public $MODULE_VERSION;
+    public $MODULE_VERSION_DATE;
+    public $MODULE_NAME;
+    public $MODULE_DESCRIPTION;
+    public $PARTNER_NAME;
+    public $PARTNER_URI;
+    public $SHOW_SUPER_ADMIN_GROUP_RIGHTS;
+    public $MODULE_GROUP_RIGHTS;
+    public $errors;
 
     function __construct()
     {
@@ -109,20 +109,28 @@ class Ibs_shopnotebook extends CModule
     function InstallDB()
     {
         // подключаем модуль для того что бы был видем класс ORM
-        if(Loader::includeModule($this->MODULE_ID)){
-            if (!Application::getConnection(ManufacturerTable::getConnectionName())->isTableExists(Base::getInstance(ManufacturerTable::class)->getDBTableName())) {
+        if (Loader::includeModule($this->MODULE_ID)) {
+            if (!Application::getConnection(ManufacturerTable::getConnectionName())->isTableExists(
+                Base::getInstance(ManufacturerTable::class)->getDBTableName()
+            )) {
                 Base::getInstance(ManufacturerTable::class)->createDbTable();
             }
 
-            if (!Application::getConnection(ModelTable::getConnectionName())->isTableExists(Base::getInstance(ModelTable::class)->getDBTableName())) {
+            if (!Application::getConnection(ModelTable::getConnectionName())->isTableExists(
+                Base::getInstance(ModelTable::class)->getDBTableName()
+            )) {
                 Base::getInstance(ModelTable::class)->createDbTable();
             }
 
-            if (!Application::getConnection(NotebookTable::getConnectionName())->isTableExists(Base::getInstance(NotebookTable::class)->getDBTableName())) {
+            if (!Application::getConnection(NotebookTable::getConnectionName())->isTableExists(
+                Base::getInstance(NotebookTable::class)->getDBTableName()
+            )) {
                 Base::getInstance(NotebookTable::class)->createDbTable();
             }
 
-            if (!Application::getConnection(OptionTable::getConnectionName())->isTableExists(Base::getInstance(OptionTable::class)->getDBTableName())) {
+            if (!Application::getConnection(OptionTable::getConnectionName())->isTableExists(
+                Base::getInstance(OptionTable::class)->getDBTableName()
+            )) {
                 Base::getInstance(OptionTable::class)->createDbTable();
             }
         }
@@ -132,20 +140,16 @@ class Ibs_shopnotebook extends CModule
     {
         if (Loader::includeModule($this->MODULE_ID)) {
             $connection = Application::getConnection();
-            if ($connection->isTableExists(ManufacturerTable::getTableName()))
-            {
+            if ($connection->isTableExists(ManufacturerTable::getTableName())) {
                 $connection->dropTable(ManufacturerTable::getTableName());
             }
-            if ($connection->isTableExists(ModelTable::getTableName()))
-            {
+            if ($connection->isTableExists(ModelTable::getTableName())) {
                 $connection->dropTable(ModelTable::getTableName());
             }
-            if ($connection->isTableExists(NotebookTable::getTableName()))
-            {
+            if ($connection->isTableExists(NotebookTable::getTableName())) {
                 $connection->dropTable(NotebookTable::getTableName());
             }
-            if ($connection->isTableExists(OptionTable::getTableName()))
-            {
+            if ($connection->isTableExists(OptionTable::getTableName())) {
                 $connection->dropTable(OptionTable::getTableName());
             }
         }
@@ -181,8 +185,7 @@ class Ibs_shopnotebook extends CModule
 
     function addData()
     {
-        if(Loader::includeModule($this->MODULE_ID)){
-
+        if (Loader::includeModule($this->MODULE_ID)) {
             $manufacturers = [
                 ['NAME' => 'Apple'],
                 ['NAME' => 'Dell'],

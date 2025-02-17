@@ -1,5 +1,6 @@
-<?
-use \Bitrix\Main\Localization\Loc;
+<?php
+
+use Bitrix\Main\Localization\Loc;
 
 if (!check_bitrix_sessid()) {
     return;

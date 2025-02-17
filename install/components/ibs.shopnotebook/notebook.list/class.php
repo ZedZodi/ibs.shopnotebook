@@ -2,8 +2,6 @@
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 
 use Bitrix\Main\Loader;
-use Bitrix\Main\Grid\Options as GridOptions;
-use Bitrix\Main\UI\PageNavigation;
 
 class NotebookListComponent extends CBitrixComponent
 {
