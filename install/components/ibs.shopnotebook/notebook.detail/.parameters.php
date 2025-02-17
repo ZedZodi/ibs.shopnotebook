@@ -7,6 +7,7 @@ $arComponentParameters = [
             'NAME' => 'ID ноутбука',
             'TYPE' => 'STRING',
             'DEFAULT' => '={$_REQUEST["NOTEBOOK"]}',
+            'PARENT' => 'BASE',
         ],
     ],
 ];

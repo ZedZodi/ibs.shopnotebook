@@ -7,11 +7,13 @@ $arComponentParameters = [
             'NAME' => 'Каталог ЧПУ',
             'TYPE' => 'STRING',
             'DEFAULT' => '/notebook/',
+            'PARENT' => 'BASE',
         ],
         'PAGE_SIZE' => [
             'NAME' => 'Количество элементов на странице',
             'TYPE' => 'STRING',
             'DEFAULT' => '10',
+            'PARENT' => 'BASE',
         ],
     ],
 ];
